@@ -47,8 +47,13 @@
               value="{{ site.data.sitetext[site.locale].contact.subject | default: "Contact Form Submission" }}">
             <div class="clearfix"></div>
             
-            <!-- reCAPTCHA v2 Widget -->
-            <div class="g-recaptcha" data-sitekey="{{ site.recaptcha_site_key }}"></div>
+            <!-- Hidden reCAPTCHA Response -->
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+
+            <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+                        
+            <!-- Redirect after submission (prevent Formspree default redirect) -->
+            <input type="hidden" name="_next" value="index.html">
             
             <div class="col-lg-12 text-center">
               <div id="success"></div>
@@ -64,8 +69,25 @@
             <input type="hidden" name="_next" value="#" />
           </div>
         </form>
-        <!-- Load reCAPTCHA script -->
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <!-- Load reCAPTCHA v3 script -->
+        <script src="https://www.google.com/recaptcha/api.js?render={{ site.recaptcha_site_key }}" async defer></script>
+
+        <script>
+          // This function is called when the form is submitted
+          function validateRecaptcha() {
+              // Execute reCAPTCHA v3 to get the token
+              grecaptcha.execute('{{ site.recaptcha_site_key }}', {action: 'submit'}).then(function(token) {
+                  // Add the token to the hidden input field
+                  document.getElementById('g-recaptcha-response').value = token;
+
+                  // Submit the form after token is added
+                  document.getElementById("contactForm").submit();
+              });
+
+              // Prevent the form from submitting immediately
+              return false;
+          }
+        </script>
       </div>
     </div>
   </div>
@@ -117,10 +139,16 @@
             </div>
             <input type="hidden" name="_subject" id="email-subject"
               value="{{ site.data.sitetext.contact.subject | default: "Contact Form Submission" }}">
+
+            <!-- Hidden reCAPTCHA Response -->
+            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+
+            <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+                        
+            <!-- Redirect after submission (prevent Formspree default redirect) -->
+            <input type="hidden" name="_next" value="index.html">
+                        
             <div class="clearfix"></div>
-            
-            <!-- reCAPTCHA v2 Widget -->
-            <div class="g-recaptcha" data-sitekey="{{ site.recaptcha_site_key }}"></div>
             
             <div class="col-lg-12 text-center">
               <div id="success"></div>
@@ -131,8 +159,25 @@
             <input type="hidden" name="_next" value="#" />
           </div>
         </form>
-        <!-- Load reCAPTCHA script -->
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <!-- Load reCAPTCHA v3 script -->
+        <script src="https://www.google.com/recaptcha/api.js?render={{ site.recaptcha_site_key }}" async defer></script>
+
+        <script>
+          // This function is called when the form is submitted
+          function validateRecaptcha() {
+              // Execute reCAPTCHA v3 to get the token
+              grecaptcha.execute('{{ site.recaptcha_site_key }}', {action: 'submit'}).then(function(token) {
+                  // Add the token to the hidden input field
+                  document.getElementById('g-recaptcha-response').value = token;
+
+                  // Submit the form after token is added
+                  document.getElementById("contactForm").submit();
+              });
+
+              // Prevent the form from submitting immediately
+              return false;
+          }
+        </script>
       </div>
     </div>
   </div>
