@@ -43,31 +43,23 @@
                 <p class="help-block text-danger"></p>
               </div>
             </div>
-            <!-- <div class="g-recaptcha" data-sitekey="6Lcf8PsqAAAAAP0C_BysvV0udaxCKqe-2OXClyeZ"></div> -->
-            <input type="hidden" name="recaptcha-response" id="recaptchaResponse">
             <input type="hidden" name="_subject" id="email-subject"
               value="{{ site.data.sitetext[site.locale].contact.subject | default: "Contact Form Submission" }}">
             <div class="clearfix"></div>
             <div class="col-lg-12 text-center">
               <div id="success"></div>
-              <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase"
+              <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' 
                 type="submit">{{ site.data.sitetext[site.locale].contact.submit | default: "Send Message" }}</button>
+                <script>
+                  function onSubmit(token) {
+                    document.getElementById("demo-form").submit();
+                  }
+                </script>
             </div>
             <input type="text" name="_gotcha" style="display:none">
             <input type="hidden" name="_next" value="#" />
           </div>
         </form>
-        <script>
-          grecaptcha.ready(function() {
-              document.getElementById('contact-form').addEventListener('submit', function(event) {
-                  event.preventDefault();
-                  grecaptcha.execute('YOUR_SITE_KEY', {action: 'submit'}).then(function(token) {
-                      document.getElementById('recaptchaResponse').value = token;
-                      event.target.submit();
-                  });
-              });
-          });
-          </script>
       </div>
     </div>
   </div>
