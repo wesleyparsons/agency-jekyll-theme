@@ -46,6 +46,10 @@
             <input type="hidden" name="_subject" id="email-subject"
               value="{{ site.data.sitetext[site.locale].contact.subject | default: "Contact Form Submission" }}">
             <div class="clearfix"></div>
+            
+            <!-- reCAPTCHA v2 Widget -->
+            <div class="g-recaptcha" data-sitekey="{{ site.recaptcha_site_key }}"></div>
+            
             <div class="col-lg-12 text-center">
               <div id="success"></div>
               <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase"
@@ -60,17 +64,8 @@
             <input type="hidden" name="_next" value="#" />
           </div>
         </form>
-        <script>
-          grecaptcha.ready(function() {
-              document.getElementById('contact-form').addEventListener('submit', function(event) {
-                  event.preventDefault();
-                  grecaptcha.execute('{{ site.recaptcha_site_key }}', {action: 'submit'}).then(function(token) {
-                      document.getElementById('recaptchaResponse').value = token;
-                      event.target.submit();
-                  });
-              });
-          });
-          </script>
+        <!-- Load reCAPTCHA script -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
       </div>
     </div>
   </div>
@@ -123,6 +118,10 @@
             <input type="hidden" name="_subject" id="email-subject"
               value="{{ site.data.sitetext.contact.subject | default: "Contact Form Submission" }}">
             <div class="clearfix"></div>
+            
+            <!-- reCAPTCHA v2 Widget -->
+            <div class="g-recaptcha" data-sitekey="{{ site.recaptcha_site_key }}"></div>
+            
             <div class="col-lg-12 text-center">
               <div id="success"></div>
               <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase"
@@ -132,17 +131,8 @@
             <input type="hidden" name="_next" value="#" />
           </div>
         </form>
-        <script>
-          grecaptcha.ready(function() {
-              document.getElementById('contact-form').addEventListener('submit', function(event) {
-                  event.preventDefault();
-                  grecaptcha.execute('{{ site.recaptcha_site_key }}', {action: 'submit'}).then(function(token) {
-                      document.getElementById('recaptchaResponse').value = token;
-                      event.target.submit();
-                  });
-              });
-          });
-          </script>
+        <!-- Load reCAPTCHA script -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
       </div>
     </div>
   </div>
